@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capitulo 2 Introducción | Pronóstico USD/COP</title>
+  <meta name="description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capitulo 2 Introducción | Pronóstico USD/COP" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capitulo 2 Introducción | Pronóstico USD/COP" />
+  
+  <meta name="twitter:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  
+
+<meta name="author" content="Carlos Felipe Cortés Cataño - Roy Díaz Vega" />
+
+
+<meta name="date" content="2023-04-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Pronostico USD/COP</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Fuente de información</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Pronóstico USD/COP</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capitulo 2</span> Introducción<a href="intro.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>La importancia de pronosticar la tasa de cambio del Peso Colombiano (COP) con el Dolar Americano (USD) radica en el impacto significativo en la economía y los negocios de un país. Algunas de las razones por las cuales es importante pronosticar la tasa de cambio de una divisa incluyen:</p>
+<p>Comercio internacional: Las empresas que realizan negocios internacionales se ven afectadas por las fluctuaciones en las tasas de cambio, ya que estas pueden afectar el costo de los bienes y servicios importados y exportados. Un pronóstico preciso de las tasas de cambio puede ayudar a las empresas a planificar mejor sus estrategias de comercio internacional.</p>
+<p>Inversión extranjera: Los inversores extranjeros que desean invertir en un país se ven afectados por las tasas de cambio, ya que estas pueden afectar el retorno de su inversión. Un pronóstico preciso de las tasas de cambio puede ayudar a los inversores a tomar decisiones informadas sobre dónde invertir su dinero.</p>
+<p>Turismo: Las tasas de cambio también pueden tener un impacto en el turismo, ya que pueden afectar el costo de los viajes y los bienes y servicios relacionados con el turismo. Un pronóstico preciso de las tasas de cambio puede ayudar a los turistas a planificar mejor sus viajes y presupuestos.</p>
+<p>Política monetaria: Los gobiernos y los bancos centrales también pueden utilizar la información sobre las tasas de cambio para formular políticas monetarias. Un pronóstico preciso de las tasas de cambio puede ayudar a los responsables de la formulación de políticas a tomar decisiones informadas sobre las tasas de interés y otros instrumentos de política monetaria.</p>
+<p>En resumen, el análisis y pronóstico de este par de divisas es importante porque puede afectar la economía y los negocios de un país como Colombiano, así como las decisiones de inversión, turismo y política monetaria. Un pronóstico preciso de las tasas de cambio puede ayudar a las empresas, inversores y responsables de la formulación de políticas a tomar decisiones informadas.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
