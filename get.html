@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo 2 Introducción | Pronóstico USD/COP</title>
+  <title>Capitulo 3 Obtención de datos | Pronóstico USD/COP</title>
   <meta name="description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo 2 Introducción | Pronóstico USD/COP" />
+  <meta property="og:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo 2 Introducción | Pronóstico USD/COP" />
+  <meta name="twitter:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
   
   <meta name="twitter:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="get.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="desco.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -160,14 +160,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Capitulo 2</span> Introducción<a href="intro.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>La importancia de pronosticar la tasa de cambio del Peso Colombiano (COP) con el Dolar Americano (USD) radica en el impacto significativo en la economía y los negocios de un país. Algunas de las razones por las cuales es importante pronosticar la tasa de cambio de una divisa incluyen:</p>
-<p>Comercio internacional: Las empresas que realizan negocios internacionales se ven afectadas por las fluctuaciones en las tasas de cambio, ya que estas pueden afectar el costo de los bienes y servicios importados y exportados. Un pronóstico preciso de las tasas de cambio puede ayudar a las empresas a planificar mejor sus estrategias de comercio internacional.</p>
-<p>Inversión extranjera: Los inversores extranjeros que desean invertir en un país se ven afectados por las tasas de cambio, ya que estas pueden afectar el retorno de su inversión. Un pronóstico preciso de las tasas de cambio puede ayudar a los inversores a tomar decisiones informadas sobre dónde invertir su dinero.</p>
-<p>Turismo: Las tasas de cambio también pueden tener un impacto en el turismo, ya que pueden afectar el costo de los viajes y los bienes y servicios relacionados con el turismo. Un pronóstico preciso de las tasas de cambio puede ayudar a los turistas a planificar mejor sus viajes y presupuestos.</p>
-<p>Política monetaria: Los gobiernos y los bancos centrales también pueden utilizar la información sobre las tasas de cambio para formular políticas monetarias. Un pronóstico preciso de las tasas de cambio puede ayudar a los responsables de la formulación de políticas a tomar decisiones informadas sobre las tasas de interés y otros instrumentos de política monetaria.</p>
-<p>En resumen, el análisis y pronóstico de este par de divisas es importante porque puede afectar la economía y los negocios de un país como Colombiano, así como las decisiones de inversión, turismo y política monetaria. Un pronóstico preciso de las tasas de cambio puede ayudar a las empresas, inversores y responsables de la formulación de políticas a tomar decisiones informadas.</p>
+<div id="get" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capitulo 3</span> Obtención de datos<a href="get.html#get" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="get.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Install dependencies if not available</span></span>
+<span id="cb1-2"><a href="get.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#py_install(&quot;reticulate&quot;,yfinance&quot;) </span></span>
+<span id="cb1-3"><a href="get.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb1-4"><a href="get.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="st">&quot;C:/Users/carlos/anaconda3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="get.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
+<span id="cb2-2"><a href="get.html#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">&quot;COP=X&quot;</span>, start<span class="op">=</span><span class="st">&quot;2017-01-01&quot;</span>, end<span class="op">=</span><span class="st">&quot;2022-12-31&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+[*********************100%***********************]  1 of 1 completed</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="get.html#cb4-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
+<pre><code>##                    Open         High  ...    Adj Close  Volume
+## Date                                  ...                     
+## 2017-01-02  3000.250000  3000.949951  ...  2957.100098       0
+## 2017-01-03  3004.149902  3004.149902  ...  2950.699951       0
+## 2017-01-04  2999.949951  2999.949951  ...  2916.199951       0
+## 2017-01-05  2902.000000  2969.399902  ...  2891.100098       0
+## 2017-01-06  2941.550049  2941.550049  ...  2897.899902       0
+## 
+## [5 rows x 6 columns]</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="get.html#cb6-1" aria-hidden="true" tabindex="-1"></a>data.to_csv(<span class="st">&quot;data.csv&quot;</span>)</span></code></pre></div>
 
 </div>
             </section>
@@ -175,8 +188,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="get.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="desco.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -207,7 +220,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-get_data.Rmd",
 "text": "Edit"
 },
 "history": {
