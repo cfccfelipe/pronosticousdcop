@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo 3 Obtención de datos | Pronóstico USD/COP</title>
+  <title>Capitulo 4 Analisis Preliminar | Pronóstico USD/COP</title>
   <meta name="description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
+  <meta property="og:title" content="Capitulo 4 Analisis Preliminar | Pronóstico USD/COP" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
+  <meta name="twitter:title" content="Capitulo 4 Analisis Preliminar | Pronóstico USD/COP" />
   
   <meta name="twitter:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="preliminar.html"/>
+<link rel="prev" href="get.html"/>
+<link rel="next" href="desco.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -161,31 +161,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="get" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capitulo 3</span> Obtención de datos<a href="get.html#get" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="get.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Install dependencies if not available</span></span>
-<span id="cb1-2"><a href="get.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#py_install(&quot;reticulate&quot;,yfinance&quot;)</span></span>
-<span id="cb1-3"><a href="get.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;reticulate&quot;)</span></span>
-<span id="cb1-4"><a href="get.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb1-5"><a href="get.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="st">&quot;C:/Users/carlos/anaconda3&quot;</span>)</span>
-<span id="cb1-6"><a href="get.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">&quot;RETICULATE_PYTHON&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/carlos/anaconda3&quot;</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="get.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
-<span id="cb3-2"><a href="get.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="get.html#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">&quot;COP=X&quot;</span>, start<span class="op">=</span><span class="st">&quot;2017-01-01&quot;</span>, end<span class="op">=</span><span class="st">&quot;2022-12-31&quot;</span>)</span></code></pre></div>
+<div id="preliminar" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Capitulo 4</span> Analisis Preliminar<a href="preliminar.html#preliminar" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="preliminar.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
+<span id="cb7-2"><a href="preliminar.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="preliminar.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-4"><a href="preliminar.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="preliminar.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar los datos</span></span>
+<span id="cb7-6"><a href="preliminar.html#cb7-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">&quot;COP=X&quot;</span>, start<span class="op">=</span><span class="st">&quot;2017-01-01&quot;</span>, end<span class="op">=</span><span class="st">&quot;2022-12-31&quot;</span>)</span>
+<span id="cb7-7"><a href="preliminar.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="preliminar.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener el año de cada fecha</span></span></code></pre></div>
 <pre><code>## 
 [*********************100%***********************]  1 of 1 completed</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="get.html#cb5-1" aria-hidden="true" tabindex="-1"></a>data.to_csv(<span class="st">&quot;data.csv&quot;</span>)</span>
-<span id="cb5-2"><a href="get.html#cb5-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<pre><code>##                    Open         High  ...    Adj Close  Volume
-## Date                                  ...                     
-## 2017-01-02  3000.250000  3000.949951  ...  2957.100098       0
-## 2017-01-03  3004.149902  3004.149902  ...  2950.699951       0
-## 2017-01-04  2999.949951  2999.949951  ...  2916.199951       0
-## 2017-01-05  2902.000000  2969.399902  ...  2891.100098       0
-## 2017-01-06  2941.550049  2941.550049  ...  2897.899902       0
-## 
-## [5 rows x 6 columns]</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="preliminar.html#cb9-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Year&#39;</span>] <span class="op">=</span> data.index.year</span>
+<span id="cb9-2"><a href="preliminar.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="preliminar.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Estadísticas descriptivas por años</span></span>
+<span id="cb9-4"><a href="preliminar.html#cb9-4" aria-hidden="true" tabindex="-1"></a>yearly_stats <span class="op">=</span> data.groupby(<span class="st">&#39;Year&#39;</span>)[<span class="st">&#39;Close&#39;</span>].describe()</span>
+<span id="cb9-5"><a href="preliminar.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="preliminar.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar boxplots por año</span></span>
+<span id="cb9-7"><a href="preliminar.html#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb9-8"><a href="preliminar.html#cb9-8" aria-hidden="true" tabindex="-1"></a>data.boxplot(column<span class="op">=</span><span class="st">&#39;Close&#39;</span>, by<span class="op">=</span><span class="st">&#39;Year&#39;</span>, vert<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-9"><a href="preliminar.html#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Precio de cierre&#39;</span>)</span>
+<span id="cb9-10"><a href="preliminar.html#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Año&#39;</span>)</span>
+<span id="cb9-11"><a href="preliminar.html#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Gráfico de caja y bigotes por año - Precio de cierre de COP=X&#39;</span>)</span>
+<span id="cb9-12"><a href="preliminar.html#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-13"><a href="preliminar.html#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="preliminar.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar dispersión de precios de cierre por año</span></span>
+<span id="cb9-15"><a href="preliminar.html#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb9-16"><a href="preliminar.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year, year_data <span class="kw">in</span> data.groupby(<span class="st">&#39;Year&#39;</span>):</span>
+<span id="cb9-17"><a href="preliminar.html#cb9-17" aria-hidden="true" tabindex="-1"></a>    plt.scatter(year_data.index, year_data[<span class="st">&#39;Close&#39;</span>], label<span class="op">=</span><span class="bu">str</span>(year), alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb9-18"><a href="preliminar.html#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Fecha&#39;</span>)</span>
+<span id="cb9-19"><a href="preliminar.html#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Precio de cierre&#39;</span>)</span>
+<span id="cb9-20"><a href="preliminar.html#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Dispersión de precios de cierre por año - COP=X&#39;</span>)</span>
+<span id="cb9-21"><a href="preliminar.html#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">&#39;Año&#39;</span>)</span>
+<span id="cb9-22"><a href="preliminar.html#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-23"><a href="preliminar.html#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-2-1.png" width="960" />
+Inicialmente, se presenta graficos descriptivos sobre el precio de cierre del precio de peso colombiano (COP) con relación al dolar estado unidense (USD). Se observa, en el diagrama de cajas y bigotes, que el precio tiene fluaciones regulares en los deferentes años, sin valores atipicos destacables, con incrementos con el paso de los años. Es de anotar que la mayor amplitud de los datos de precio, y por tanto una mayor fluctuación de la tasa, se presenta en el reciente año 2022.</p>
+<p>Para el grafico de dispesión en los años evaluados, se muestra claramente el ascenso de la tasa de cambio COL/USD. Mostrandose con mayor dispersión de los datos en los años 2020 y 2022.</p>
 
 </div>
             </section>
@@ -193,8 +206,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="preliminar.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="get.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="desco.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -225,7 +238,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-get_data.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-preliminar.Rmd",
 "text": "Edit"
 },
 "history": {
