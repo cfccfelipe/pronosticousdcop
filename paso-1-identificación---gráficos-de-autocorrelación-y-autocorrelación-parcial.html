@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo 4 Analisis Preliminar | Pronóstico USD/COP</title>
+  <title>Capitulo 9 Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial | Pronóstico USD/COP</title>
   <meta name="description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo 4 Analisis Preliminar | Pronóstico USD/COP" />
+  <meta property="og:title" content="Capitulo 9 Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial | Pronóstico USD/COP" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo 4 Analisis Preliminar | Pronóstico USD/COP" />
+  <meta name="twitter:title" content="Capitulo 9 Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial | Pronóstico USD/COP" />
   
   <meta name="twitter:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="get.html"/>
-<link rel="next" href="ma.html"/>
+<link rel="prev" href="metodología-box-jenkins.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -144,6 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="desco.html"><a href="desco.html"><i class="fa fa-check"></i><b>6</b> Descomposición</a></li>
 <li class="chapter" data-level="7" data-path="metodo-holt-winter-hw.html"><a href="metodo-holt-winter-hw.html"><i class="fa fa-check"></i><b>7</b> Metodo Holt-Winter {#h&amp;w}</a></li>
 <li class="chapter" data-level="8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>8</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="9" data-path="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html"><i class="fa fa-check"></i><b>9</b> Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -164,44 +165,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preliminar" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Capitulo 4</span> Analisis Preliminar<a href="preliminar.html#preliminar" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="preliminar.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
-<span id="cb7-2"><a href="preliminar.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-3"><a href="preliminar.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-4"><a href="preliminar.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="preliminar.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar los datos</span></span>
-<span id="cb7-6"><a href="preliminar.html#cb7-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">&quot;COP=X&quot;</span>, start<span class="op">=</span><span class="st">&quot;2017-01-01&quot;</span>, end<span class="op">=</span><span class="st">&quot;2022-12-31&quot;</span>)</span>
-<span id="cb7-7"><a href="preliminar.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="preliminar.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtener el año de cada fecha</span></span></code></pre></div>
-<pre><code>## 
-[*********************100%***********************]  1 of 1 completed</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="preliminar.html#cb9-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;Year&#39;</span>] <span class="op">=</span> data.index.year</span>
-<span id="cb9-2"><a href="preliminar.html#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="preliminar.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Estadísticas descriptivas por años</span></span>
-<span id="cb9-4"><a href="preliminar.html#cb9-4" aria-hidden="true" tabindex="-1"></a>yearly_stats <span class="op">=</span> data.groupby(<span class="st">&#39;Year&#39;</span>)[<span class="st">&#39;Close&#39;</span>].describe()</span>
-<span id="cb9-5"><a href="preliminar.html#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="preliminar.html#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar boxplots por año</span></span>
-<span id="cb9-7"><a href="preliminar.html#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb9-8"><a href="preliminar.html#cb9-8" aria-hidden="true" tabindex="-1"></a>data.boxplot(column<span class="op">=</span><span class="st">&#39;Close&#39;</span>, by<span class="op">=</span><span class="st">&#39;Year&#39;</span>, vert<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb9-9"><a href="preliminar.html#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Precio de cierre&#39;</span>)</span>
-<span id="cb9-10"><a href="preliminar.html#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Año&#39;</span>)</span>
-<span id="cb9-11"><a href="preliminar.html#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Gráfico de caja y bigotes por año - Precio de cierre de COP=X&#39;</span>)</span>
-<span id="cb9-12"><a href="preliminar.html#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb9-13"><a href="preliminar.html#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="preliminar.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Graficar dispersión de precios de cierre por año</span></span>
-<span id="cb9-15"><a href="preliminar.html#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb9-16"><a href="preliminar.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year, year_data <span class="kw">in</span> data.groupby(<span class="st">&#39;Year&#39;</span>):</span>
-<span id="cb9-17"><a href="preliminar.html#cb9-17" aria-hidden="true" tabindex="-1"></a>    plt.scatter(year_data.index, year_data[<span class="st">&#39;Close&#39;</span>], label<span class="op">=</span><span class="bu">str</span>(year), alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
-<span id="cb9-18"><a href="preliminar.html#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Fecha&#39;</span>)</span>
-<span id="cb9-19"><a href="preliminar.html#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Precio de cierre&#39;</span>)</span>
-<span id="cb9-20"><a href="preliminar.html#cb9-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Dispersión de precios de cierre por año - COP=X&#39;</span>)</span>
-<span id="cb9-21"><a href="preliminar.html#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">&#39;Año&#39;</span>)</span>
-<span id="cb9-22"><a href="preliminar.html#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb9-23"><a href="preliminar.html#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-2-1.png" width="960" />
-Inicialmente, se presenta graficos descriptivos sobre el precio de cierre del precio de peso colombiano (COP) con relación al dolar estado unidense (USD). Se observa, en el diagrama de cajas y bigotes, que el precio tiene fluaciones regulares en los deferentes años, sin valores atipicos destacables, con incrementos con el paso de los años. Es de anotar que la mayor amplitud de los datos de precio, y por tanto una mayor fluctuación de la tasa, se presenta en el reciente año 2022.</p>
-<p>Para el grafico de dispesión en los años evaluados, se muestra claramente el ascenso de la tasa de cambio COL/USD. Mostrandose con mayor dispersión de los datos en los años 2020 y 2022.</p>
+<div id="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Capitulo 9</span> Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial<a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima.model <span class="im">import</span> ARIMA</span>
+<span id="cb50-2"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb50-3"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb50-7"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(data[<span class="st">&quot;Close&quot;</span>])</span>
+<span id="cb50-8"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">&#39;Serie de tiempo del índice del dólar con el peso colombiano&#39;</span>)</span>
+<span id="cb50-9"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb50-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].acorr(data[<span class="st">&quot;Close&quot;</span>], maxlags<span class="op">=</span><span class="dv">1000</span>)</span></code></pre></div>
+<pre><code>## (array([-1000,  -999,  -998, ...,   998,   999,  1000]), array([0.34378464, 0.34440223, 0.34501769, ..., 0.34501769, 0.34440223,
+##        0.34378464]), &lt;matplotlib.collections.LineCollection object at 0x000001CB599A1610&gt;, &lt;matplotlib.lines.Line2D object at 0x000001CB599A1940&gt;)</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb52-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Autocorrelación&#39;</span>)</span>
+<span id="cb52-2"><a href="paso-1-identificación---gráficos-de-autocorrelación-y-autocorrelación-parcial.html#cb52-2" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-13.png" width="960" /></p>
 
 </div>
             </section>
@@ -209,8 +188,8 @@ Inicialmente, se presenta graficos descriptivos sobre el precio de cierre del pr
           </div>
         </div>
       </div>
-<a href="get.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ma.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="metodología-box-jenkins.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -241,7 +220,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-preliminar.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/7.boxjen.Rmd",
 "text": "Edit"
 },
 "history": {

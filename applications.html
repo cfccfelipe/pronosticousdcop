@@ -4,34 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capitulo 3 Obtención de datos | Pronóstico USD/COP</title>
-  <meta name="description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  <title>Chapter 5 Applications | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
+  <meta property="og:title" content="Chapter 5 Applications | A Minimal Book Example" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capitulo 3 Obtención de datos | Pronóstico USD/COP" />
+  <meta name="twitter:title" content="Chapter 5 Applications | A Minimal Book Example" />
   
-  <meta name="twitter:description" content="Análisis y pronóstico a la serie temporal del par de divisas Dolar Americano (USD) con Peso Colombiano (COP)" />
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Carlos Felipe Cortés Cataño - Roy Díaz Vega" />
+<meta name="author" content="Yihui Xie" />
 
 
-<meta name="date" content="2023-05-18" />
+<meta name="date" content="2023-04-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="preliminar.html"/>
+<link rel="prev" href="methods.html"/>
+<link rel="next" href="final-words.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -133,17 +155,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Pronostico USD/COP</a></li>
+<li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Fuente de información</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducción</a></li>
-<li class="chapter" data-level="3" data-path="get.html"><a href="get.html"><i class="fa fa-check"></i><b>3</b> Obtención de datos</a></li>
-<li class="chapter" data-level="4" data-path="preliminar.html"><a href="preliminar.html"><i class="fa fa-check"></i><b>4</b> Analisis Preliminar</a></li>
-<li class="chapter" data-level="5" data-path="ma.html"><a href="ma.html"><i class="fa fa-check"></i><b>5</b> Medias Moviles</a></li>
-<li class="chapter" data-level="6" data-path="desco.html"><a href="desco.html"><i class="fa fa-check"></i><b>6</b> Descomposición</a></li>
-<li class="chapter" data-level="7" data-path="metodo-holt-winter-hw.html"><a href="metodo-holt-winter-hw.html"><i class="fa fa-check"></i><b>7</b> Metodo Holt-Winter {#h&amp;w}</a></li>
-<li class="chapter" data-level="8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>8</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>4.1</b> math example</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -156,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Pronóstico USD/COP</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
           </h1>
         </div>
 
@@ -164,40 +192,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="get" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Capitulo 3</span> Obtención de datos<a href="get.html#get" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="get.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Install dependencies if not available</span></span>
-<span id="cb1-2"><a href="get.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#py_install(&quot;reticulate&quot;,yfinance&quot;)</span></span>
-<span id="cb1-3"><a href="get.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;reticulate&quot;)</span></span>
-<span id="cb1-4"><a href="get.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb1-5"><a href="get.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON=</span><span class="st">&quot;C:/Users/carlos/anaconda3&quot;</span>)</span>
-<span id="cb1-6"><a href="get.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getenv</span>(<span class="st">&quot;RETICULATE_PYTHON&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;C:/Users/carlos/anaconda3&quot;</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="get.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
-<span id="cb3-2"><a href="get.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="get.html#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> yf.download(<span class="st">&quot;COP=X&quot;</span>, start<span class="op">=</span><span class="st">&quot;2017-01-01&quot;</span>, end<span class="op">=</span><span class="st">&quot;2022-12-31&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-[*********************100%***********************]  1 of 1 completed</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="get.html#cb5-1" aria-hidden="true" tabindex="-1"></a>data.to_csv(<span class="st">&quot;data.csv&quot;</span>)</span>
-<span id="cb5-2"><a href="get.html#cb5-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div>
-<pre><code>##                    Open         High  ...    Adj Close  Volume
-## Date                                  ...                     
-## 2017-01-02  3000.250000  3000.949951  ...  2957.100098       0
-## 2017-01-03  3004.149902  3004.149902  ...  2950.699951       0
-## 2017-01-04  2999.949951  2999.949951  ...  2916.199951       0
-## 2017-01-05  2902.000000  2969.399902  ...  2891.100098       0
-## 2017-01-06  2941.550049  2941.550049  ...  2897.899902       0
-## 
-## [5 rows x 6 columns]</code></pre>
+<div id="applications" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Applications<a href="applications.html#applications" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Some <em>significant</em> applications are demonstrated in this chapter.</p>
+<div id="example-one" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Example one<a href="applications.html#example-one" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="example-two" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Example two<a href="applications.html#example-two" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="preliminar.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -228,7 +240,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-get_data.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-application.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -251,6 +263,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
