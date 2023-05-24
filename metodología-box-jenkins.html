@@ -23,7 +23,7 @@
 <meta name="author" content="Carlos Felipe Cortés Cataño - Roy Díaz Vega" />
 
 
-<meta name="date" content="2023-05-18" />
+<meta name="date" content="2023-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="metodo-holt-winter-hw.html"/>
-
+<link rel="next" href="facebook-prophet.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -144,6 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="desco.html"><a href="desco.html"><i class="fa fa-check"></i><b>6</b> Descomposición</a></li>
 <li class="chapter" data-level="7" data-path="metodo-holt-winter-hw.html"><a href="metodo-holt-winter-hw.html"><i class="fa fa-check"></i><b>7</b> Metodo Holt-Winter {#h&amp;w}</a></li>
 <li class="chapter" data-level="8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>8</b> Metodología Box-Jenkins</a></li>
+<li class="chapter" data-level="9" data-path="facebook-prophet.html"><a href="facebook-prophet.html"><i class="fa fa-check"></i><b>9</b> Facebook Prophet</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -167,79 +168,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="metodología-box-jenkins" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Capitulo 8</span> Metodología Box-Jenkins<a href="metodología-box-jenkins.html#metodología-box-jenkins" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Paso 0: Verificar que la serie se vuelva estacionaria para aplicar modelo ARIMA correctamente. Para verificar que es estacionaria usamos prueba AD Fuller</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="metodología-box-jenkins.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
-<span id="cb50-2"><a href="metodología-box-jenkins.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="metodología-box-jenkins.html#cb50-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;valor_diferenciado&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;Close&#39;</span>].diff(<span class="dv">55</span>)</span>
-<span id="cb50-4"><a href="metodología-box-jenkins.html#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="metodología-box-jenkins.html#cb50-5" aria-hidden="true" tabindex="-1"></a>copydata <span class="op">=</span> data.dropna()</span>
-<span id="cb50-6"><a href="metodología-box-jenkins.html#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-7"><a href="metodología-box-jenkins.html#cb50-7" aria-hidden="true" tabindex="-1"></a>resultado_adf <span class="op">=</span> adfuller(copydata[<span class="st">&#39;valor_diferenciado&#39;</span>])</span>
-<span id="cb50-8"><a href="metodología-box-jenkins.html#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-9"><a href="metodología-box-jenkins.html#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Estadísticas de la prueba ADF:&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="metodología-box-jenkins.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller</span>
+<span id="cb49-2"><a href="metodología-box-jenkins.html#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="metodología-box-jenkins.html#cb49-3" aria-hidden="true" tabindex="-1"></a>data[<span class="st">&#39;valor_diferenciado&#39;</span>] <span class="op">=</span> data[<span class="st">&#39;Close&#39;</span>].diff(<span class="dv">55</span>)</span>
+<span id="cb49-4"><a href="metodología-box-jenkins.html#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="metodología-box-jenkins.html#cb49-5" aria-hidden="true" tabindex="-1"></a>copydata <span class="op">=</span> data.dropna()</span>
+<span id="cb49-6"><a href="metodología-box-jenkins.html#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="metodología-box-jenkins.html#cb49-7" aria-hidden="true" tabindex="-1"></a>resultado_adf <span class="op">=</span> adfuller(copydata[<span class="st">&#39;valor_diferenciado&#39;</span>])</span>
+<span id="cb49-8"><a href="metodología-box-jenkins.html#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="metodología-box-jenkins.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Estadísticas de la prueba ADF:&#39;</span>)</span></code></pre></div>
 <pre><code>## Estadísticas de la prueba ADF:</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="metodología-box-jenkins.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor de la estadística de prueba:&#39;</span>, resultado_adf[<span class="dv">0</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="metodología-box-jenkins.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor de la estadística de prueba:&#39;</span>, resultado_adf[<span class="dv">0</span>])</span></code></pre></div>
 <pre><code>## Valor de la estadística de prueba: -4.591829862369242</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="metodología-box-jenkins.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor p - Umbral menor a 0.05:&#39;</span>, resultado_adf[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="metodología-box-jenkins.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor p - Umbral menor a 0.05:&#39;</span>, resultado_adf[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## Valor p - Umbral menor a 0.05: 0.00013372340263588406</code></pre>
 <p>Nuestra diferenciación se aplicaría a 55 periodos</p>
 <p>Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial ACF y PACF.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="metodología-box-jenkins.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb56-2"><a href="metodología-box-jenkins.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf</span>
-<span id="cb56-3"><a href="metodología-box-jenkins.html#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-4"><a href="metodología-box-jenkins.html#cb56-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb56-5"><a href="metodología-box-jenkins.html#cb56-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>])</span>
-<span id="cb56-6"><a href="metodología-box-jenkins.html#cb56-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">&#39;Serie de tiempo del índice del dólar con el peso colombiano&#39;</span>)</span>
-<span id="cb56-7"><a href="metodología-box-jenkins.html#cb56-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].acorr(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>], maxlags<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="metodología-box-jenkins.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb55-2"><a href="metodología-box-jenkins.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.tsaplots <span class="im">import</span> plot_acf</span>
+<span id="cb55-3"><a href="metodología-box-jenkins.html#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="metodología-box-jenkins.html#cb55-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb55-5"><a href="metodología-box-jenkins.html#cb55-5" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>])</span>
+<span id="cb55-6"><a href="metodología-box-jenkins.html#cb55-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">&#39;Serie de tiempo del índice del dólar con el peso colombiano&#39;</span>)</span>
+<span id="cb55-7"><a href="metodología-box-jenkins.html#cb55-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].acorr(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>], maxlags<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## (array([-10,  -9,  -8,  -7,  -6,  -5,  -4,  -3,  -2,  -1,   0,   1,   2,
 ##          3,   4,   5,   6,   7,   8,   9,  10]), array([0.75273421, 0.77763472, 0.80322799, 0.82740277, 0.85119328,
 ##        0.87748079, 0.90424636, 0.92843302, 0.95371696, 0.97590483,
 ##        1.        , 0.97590483, 0.95371696, 0.92843302, 0.90424636,
 ##        0.87748079, 0.85119328, 0.82740277, 0.80322799, 0.77763472,
-##        0.75273421]), &lt;matplotlib.collections.LineCollection object at 0x000002033E88A700&gt;, &lt;matplotlib.lines.Line2D object at 0x000002033E88A4F0&gt;)</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="metodología-box-jenkins.html#cb58-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Autocorrelación&#39;</span>)</span>
-<span id="cb58-2"><a href="metodología-box-jenkins.html#cb58-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+##        0.75273421]), &lt;matplotlib.collections.LineCollection object at 0x000001F486BDD850&gt;, &lt;matplotlib.lines.Line2D object at 0x000001F486BDDF10&gt;)</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="metodología-box-jenkins.html#cb57-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Autocorrelación&#39;</span>)</span>
+<span id="cb57-2"><a href="metodología-box-jenkins.html#cb57-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-13.png" width="960" />
 De acuerdo al gráfico anterior dejaremos autocorrelación y media movil en 1 porque es el que más se acerca a 1 o la autocorrelación más fuerte.</p>
 <p>Paso 2: Estimación - Ajustar un modelo ARIMA</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="metodología-box-jenkins.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima.model <span class="im">import</span> ARIMA</span>
-<span id="cb59-2"><a href="metodología-box-jenkins.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co">#copydata = copydata.set_index(&quot;Date&quot;)</span></span>
-<span id="cb59-3"><a href="metodología-box-jenkins.html#cb59-3" aria-hidden="true" tabindex="-1"></a>copydata<span class="op">=</span> copydata.to_period(<span class="st">&#39;D&#39;</span>)</span>
-<span id="cb59-4"><a href="metodología-box-jenkins.html#cb59-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ARIMA(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>], order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb59-5"><a href="metodología-box-jenkins.html#cb59-5" aria-hidden="true" tabindex="-1"></a>model_fit <span class="op">=</span> model.fit()</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="metodología-box-jenkins.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.arima.model <span class="im">import</span> ARIMA</span>
+<span id="cb58-2"><a href="metodología-box-jenkins.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># copydata = copydata.set_index(&quot;Date&quot;)</span></span>
+<span id="cb58-3"><a href="metodología-box-jenkins.html#cb58-3" aria-hidden="true" tabindex="-1"></a>copydata<span class="op">=</span> copydata.to_period(<span class="st">&#39;D&#39;</span>)</span>
+<span id="cb58-4"><a href="metodología-box-jenkins.html#cb58-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ARIMA(copydata[<span class="st">&quot;valor_diferenciado&quot;</span>], order<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb58-5"><a href="metodología-box-jenkins.html#cb58-5" aria-hidden="true" tabindex="-1"></a>model_fit <span class="op">=</span> model.fit()</span></code></pre></div>
 <p>Paso 3: Diagnóstico - Verificar los residuos del modelo</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="metodología-box-jenkins.html#cb60-1" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> pd.Series(model_fit.resid)</span>
-<span id="cb60-2"><a href="metodología-box-jenkins.html#cb60-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb60-3"><a href="metodología-box-jenkins.html#cb60-3" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> residuals.reset_index()</span>
-<span id="cb60-4"><a href="metodología-box-jenkins.html#cb60-4" aria-hidden="true" tabindex="-1"></a>residuals[<span class="st">&quot;Date&quot;</span>] <span class="op">=</span> residuals[<span class="st">&quot;Date&quot;</span>].astype(<span class="st">&quot;str&quot;</span>)</span>
-<span id="cb60-5"><a href="metodología-box-jenkins.html#cb60-5" aria-hidden="true" tabindex="-1"></a>residuals<span class="op">=</span>residuals.set_index(<span class="st">&quot;Date&quot;</span>)</span>
-<span id="cb60-6"><a href="metodología-box-jenkins.html#cb60-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(residuals)</span>
-<span id="cb60-7"><a href="metodología-box-jenkins.html#cb60-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">&#39;Residuos del modelo ARIMA&#39;</span>)</span>
-<span id="cb60-8"><a href="metodología-box-jenkins.html#cb60-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="metodología-box-jenkins.html#cb59-1" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> pd.Series(model_fit.resid)</span>
+<span id="cb59-2"><a href="metodología-box-jenkins.html#cb59-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
+<span id="cb59-3"><a href="metodología-box-jenkins.html#cb59-3" aria-hidden="true" tabindex="-1"></a>residuals <span class="op">=</span> residuals.reset_index()</span>
+<span id="cb59-4"><a href="metodología-box-jenkins.html#cb59-4" aria-hidden="true" tabindex="-1"></a>residuals[<span class="st">&quot;Date&quot;</span>] <span class="op">=</span> residuals[<span class="st">&quot;Date&quot;</span>].astype(<span class="st">&quot;str&quot;</span>)</span>
+<span id="cb59-5"><a href="metodología-box-jenkins.html#cb59-5" aria-hidden="true" tabindex="-1"></a>residuals<span class="op">=</span>residuals.set_index(<span class="st">&quot;Date&quot;</span>)</span>
+<span id="cb59-6"><a href="metodología-box-jenkins.html#cb59-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(residuals)</span>
+<span id="cb59-7"><a href="metodología-box-jenkins.html#cb59-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">&#39;Residuos del modelo ARIMA&#39;</span>)</span>
+<span id="cb59-8"><a href="metodología-box-jenkins.html#cb59-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>))</span></code></pre></div>
 <pre><code>## [(-1.5, 1.5)]</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="metodología-box-jenkins.html#cb62-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Distribución de residuos&#39;</span>)</span>
-<span id="cb62-2"><a href="metodología-box-jenkins.html#cb62-2" aria-hidden="true" tabindex="-1"></a>residuals.plot(kind<span class="op">=</span><span class="st">&#39;kde&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
-<span id="cb62-3"><a href="metodología-box-jenkins.html#cb62-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="metodología-box-jenkins.html#cb61-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Distribución de residuos&#39;</span>)</span>
+<span id="cb61-2"><a href="metodología-box-jenkins.html#cb61-2" aria-hidden="true" tabindex="-1"></a>residuals.plot(kind<span class="op">=</span><span class="st">&#39;kde&#39;</span>, ax<span class="op">=</span>ax[<span class="dv">1</span>])</span>
+<span id="cb61-3"><a href="metodología-box-jenkins.html#cb61-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-15.png" width="1152" /></p>
 <p>No se evidencia patrones o tendencia en los residuos permitiendo validar el primer supuesto y su media parece estar cercana a 0. Sin embargo, la distribución de los residuos no es normal, lo que indica que el modelo no captura adecuadamente la estructura de la serie. De igual manera realizamos el pronóstico para comparar</p>
 <p>Paso 4 Pronóstico - Generar pronósticos futuros</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="metodología-box-jenkins.html#cb63-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> model_fit.forecast(steps<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb63-2"><a href="metodología-box-jenkins.html#cb63-2" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> forecast.reset_index()</span>
-<span id="cb63-3"><a href="metodología-box-jenkins.html#cb63-3" aria-hidden="true" tabindex="-1"></a>forecast[<span class="st">&quot;index&quot;</span>] <span class="op">=</span> forecast[<span class="st">&quot;index&quot;</span>].dt.to_timestamp()</span>
-<span id="cb63-4"><a href="metodología-box-jenkins.html#cb63-4" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> forecast.set_index(<span class="st">&quot;index&quot;</span>)</span>
-<span id="cb63-5"><a href="metodología-box-jenkins.html#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-6"><a href="metodología-box-jenkins.html#cb63-6" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> copydata.reset_index()</span>
-<span id="cb63-7"><a href="metodología-box-jenkins.html#cb63-7" aria-hidden="true" tabindex="-1"></a>real[<span class="st">&quot;Date&quot;</span>] <span class="op">=</span> real[<span class="st">&quot;Date&quot;</span>].dt.to_timestamp()</span>
-<span id="cb63-8"><a href="metodología-box-jenkins.html#cb63-8" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> real[(real[<span class="st">&quot;Date&quot;</span>] <span class="op">&gt;</span> <span class="st">&quot;2021-05-01&quot;</span>) <span class="op">&amp;</span> (real[<span class="st">&quot;Date&quot;</span>] <span class="op">&lt;</span> <span class="st">&quot;2021-05-22&quot;</span>)][[<span class="st">&quot;valor_diferenciado&quot;</span>, <span class="st">&quot;Date&quot;</span>]]</span>
-<span id="cb63-9"><a href="metodología-box-jenkins.html#cb63-9" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> real.set_index(<span class="st">&quot;Date&quot;</span>)</span>
-<span id="cb63-10"><a href="metodología-box-jenkins.html#cb63-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-11"><a href="metodología-box-jenkins.html#cb63-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-12"><a href="metodología-box-jenkins.html#cb63-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb63-13"><a href="metodología-box-jenkins.html#cb63-13" aria-hidden="true" tabindex="-1"></a>plt.plot(forecast, label<span class="op">=</span><span class="st">&#39;Pronósticos&#39;</span>)</span>
-<span id="cb63-14"><a href="metodología-box-jenkins.html#cb63-14" aria-hidden="true" tabindex="-1"></a>plt.plot(real, label<span class="op">=</span><span class="st">&#39;Serie de tiempo original&#39;</span>)</span>
-<span id="cb63-15"><a href="metodología-box-jenkins.html#cb63-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-16"><a href="metodología-box-jenkins.html#cb63-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Pronóstico del índice del dólar con peso Colombiano&#39;</span>)</span>
-<span id="cb63-17"><a href="metodología-box-jenkins.html#cb63-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb63-18"><a href="metodología-box-jenkins.html#cb63-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="metodología-box-jenkins.html#cb62-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> model_fit.forecast(steps<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb62-2"><a href="metodología-box-jenkins.html#cb62-2" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> forecast.reset_index()</span>
+<span id="cb62-3"><a href="metodología-box-jenkins.html#cb62-3" aria-hidden="true" tabindex="-1"></a>forecast[<span class="st">&quot;index&quot;</span>] <span class="op">=</span> forecast[<span class="st">&quot;index&quot;</span>].dt.to_timestamp()</span>
+<span id="cb62-4"><a href="metodología-box-jenkins.html#cb62-4" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> forecast.set_index(<span class="st">&quot;index&quot;</span>)</span>
+<span id="cb62-5"><a href="metodología-box-jenkins.html#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-6"><a href="metodología-box-jenkins.html#cb62-6" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> copydata.reset_index()</span>
+<span id="cb62-7"><a href="metodología-box-jenkins.html#cb62-7" aria-hidden="true" tabindex="-1"></a>real[<span class="st">&quot;Date&quot;</span>] <span class="op">=</span> real[<span class="st">&quot;Date&quot;</span>].dt.to_timestamp()</span>
+<span id="cb62-8"><a href="metodología-box-jenkins.html#cb62-8" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> real[(real[<span class="st">&quot;Date&quot;</span>] <span class="op">&gt;</span> <span class="st">&quot;2021-05-01&quot;</span>) <span class="op">&amp;</span> (real[<span class="st">&quot;Date&quot;</span>] <span class="op">&lt;</span> <span class="st">&quot;2021-05-22&quot;</span>)][[<span class="st">&quot;valor_diferenciado&quot;</span>, <span class="st">&quot;Date&quot;</span>]]</span>
+<span id="cb62-9"><a href="metodología-box-jenkins.html#cb62-9" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> real.set_index(<span class="st">&quot;Date&quot;</span>)</span>
+<span id="cb62-10"><a href="metodología-box-jenkins.html#cb62-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-11"><a href="metodología-box-jenkins.html#cb62-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-12"><a href="metodología-box-jenkins.html#cb62-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb62-13"><a href="metodología-box-jenkins.html#cb62-13" aria-hidden="true" tabindex="-1"></a>plt.plot(forecast, label<span class="op">=</span><span class="st">&#39;Pronósticos&#39;</span>)</span>
+<span id="cb62-14"><a href="metodología-box-jenkins.html#cb62-14" aria-hidden="true" tabindex="-1"></a>plt.plot(real, label<span class="op">=</span><span class="st">&#39;Serie de tiempo original&#39;</span>)</span>
+<span id="cb62-15"><a href="metodología-box-jenkins.html#cb62-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-16"><a href="metodología-box-jenkins.html#cb62-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">&#39;Pronóstico del índice del dólar con peso Colombiano&#39;</span>)</span>
+<span id="cb62-17"><a href="metodología-box-jenkins.html#cb62-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb62-18"><a href="metodología-box-jenkins.html#cb62-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-17.png" width="960" />
 La proyección tampoco se ajusta mucho a la serie de tiempo. En conclusión, al igual que el metodo Holt-Winter, el resultado es una linea de tendencia recta y necesitamos una opción que logre predecir mejor los cambios, allí aplicaremos metricas como RSME.</p>
 
@@ -249,8 +250,8 @@ La proyección tampoco se ajusta mucho a la serie de tiempo. En conclusión, al 
           </div>
         </div>
       </div>
-<a href="metodo-holt-winter-hw.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="metodo-holt-winter-hw.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="facebook-prophet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -281,7 +282,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/7.boxjen.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07.boxjen.Rmd",
 "text": "Edit"
 },
 "history": {
