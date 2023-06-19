@@ -23,7 +23,7 @@
 <meta name="author" content="Carlos Felipe Cortés Cataño - Roy Díaz Vega" />
 
 
-<meta name="date" content="2023-05-24" />
+<meta name="date" content="2023-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="metodo-holt-winter-hw.html"><a href="metodo-holt-winter-hw.html"><i class="fa fa-check"></i><b>7</b> Metodo Holt-Winter {#h&amp;w}</a></li>
 <li class="chapter" data-level="8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>8</b> Metodología Box-Jenkins</a></li>
 <li class="chapter" data-level="9" data-path="facebook-prophet.html"><a href="facebook-prophet.html"><i class="fa fa-check"></i><b>9</b> Facebook Prophet</a></li>
+<li class="chapter" data-level="10" data-path="elman.html"><a href="elman.html"><i class="fa fa-check"></i><b>10</b> Red Neuronal Recurrente-ELMAN</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -179,9 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-9"><a href="metodología-box-jenkins.html#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Estadísticas de la prueba ADF:&#39;</span>)</span></code></pre></div>
 <pre><code>## Estadísticas de la prueba ADF:</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="metodología-box-jenkins.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor de la estadística de prueba:&#39;</span>, resultado_adf[<span class="dv">0</span>])</span></code></pre></div>
-<pre><code>## Valor de la estadística de prueba: -4.591829862369242</code></pre>
+<pre><code>## Valor de la estadística de prueba: -4.591829862369245</code></pre>
 <div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="metodología-box-jenkins.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;Valor p - Umbral menor a 0.05:&#39;</span>, resultado_adf[<span class="dv">1</span>])</span></code></pre></div>
-<pre><code>## Valor p - Umbral menor a 0.05: 0.00013372340263588406</code></pre>
+<pre><code>## Valor p - Umbral menor a 0.05: 0.00013372340263588213</code></pre>
 <p>Nuestra diferenciación se aplicaría a 55 periodos</p>
 <p>Paso 1: Identificación - Gráficos de autocorrelación y autocorrelación parcial ACF y PACF.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="metodología-box-jenkins.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -196,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        0.87748079, 0.90424636, 0.92843302, 0.95371696, 0.97590483,
 ##        1.        , 0.97590483, 0.95371696, 0.92843302, 0.90424636,
 ##        0.87748079, 0.85119328, 0.82740277, 0.80322799, 0.77763472,
-##        0.75273421]), &lt;matplotlib.collections.LineCollection object at 0x000001F486BDD850&gt;, &lt;matplotlib.lines.Line2D object at 0x000001F486BDDF10&gt;)</code></pre>
+##        0.75273421]), &lt;matplotlib.collections.LineCollection object at 0x000002733C868670&gt;, &lt;matplotlib.lines.Line2D object at 0x000002733C868EE0&gt;)</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="metodología-box-jenkins.html#cb57-1" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">&#39;Autocorrelación&#39;</span>)</span>
 <span id="cb57-2"><a href="metodología-box-jenkins.html#cb57-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-13.png" width="960" />

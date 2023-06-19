@@ -23,7 +23,7 @@
 <meta name="author" content="Carlos Felipe Cortés Cataño - Roy Díaz Vega" />
 
 
-<meta name="date" content="2023-05-24" />
+<meta name="date" content="2023-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="metodología-box-jenkins.html"/>
-
+<link rel="next" href="elman.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="metodo-holt-winter-hw.html"><a href="metodo-holt-winter-hw.html"><i class="fa fa-check"></i><b>7</b> Metodo Holt-Winter {#h&amp;w}</a></li>
 <li class="chapter" data-level="8" data-path="metodología-box-jenkins.html"><a href="metodología-box-jenkins.html"><i class="fa fa-check"></i><b>8</b> Metodología Box-Jenkins</a></li>
 <li class="chapter" data-level="9" data-path="facebook-prophet.html"><a href="facebook-prophet.html"><i class="fa fa-check"></i><b>9</b> Facebook Prophet</a></li>
+<li class="chapter" data-level="10" data-path="elman.html"><a href="elman.html"><i class="fa fa-check"></i><b>10</b> Red Neuronal Recurrente-ELMAN</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -185,12 +186,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Paso 1: Creamos el modelo Prophet. No especificaremos los puntos de cambios, que el mismo algortimo los determine. Hemos visto que nuestro modelo es aditivo. No tenemos estacionalidad diaria, ni semanal evidente por lo tanto no colocaremos los parametros como True.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="facebook-prophet.html#cb65-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Prophet(seasonality_mode<span class="op">=</span><span class="st">&quot;additive&quot;</span>)</span>
 <span id="cb65-2"><a href="facebook-prophet.html#cb65-2" aria-hidden="true" tabindex="-1"></a>model.fit(df)</span></code></pre></div>
-<pre><code>## &lt;prophet.forecaster.Prophet object at 0x000001F4861775E0&gt;
+<pre><code>## &lt;prophet.forecaster.Prophet object at 0x000002733F8FA370&gt;
 ## 
-## INFO:prophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.</code></pre>
+## 19:48:53 - cmdstanpy - INFO - Chain [1] start processing
+## 19:48:54 - cmdstanpy - INFO - Chain [1] done processing</code></pre>
 <p>Paso 2: Creamos los 15 siguientes dias que hemos estado pronosticando</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="facebook-prophet.html#cb67-1" aria-hidden="true" tabindex="-1"></a>future <span class="op">=</span> model.make_future_dataframe(periods<span class="op">=</span><span class="dv">15</span>) </span>
 <span id="cb67-2"><a href="facebook-prophet.html#cb67-2" aria-hidden="true" tabindex="-1"></a>future</span></code></pre></div>
@@ -209,159 +208,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## [1579 rows x 1 columns]</code></pre>
 <p>Paso 3: Pronosticamos y graficamos</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="facebook-prophet.html#cb69-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> model.predict(future)</span></code></pre></div>
-<pre><code>## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="facebook-prophet.html#cb71-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> model.plot(forecast)</span>
-<span id="cb71-2"><a href="facebook-prophet.html#cb71-2" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="facebook-prophet.html#cb69-1" aria-hidden="true" tabindex="-1"></a>forecast <span class="op">=</span> model.predict(future)</span>
+<span id="cb69-2"><a href="facebook-prophet.html#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="facebook-prophet.html#cb69-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> model.plot(forecast)</span>
+<span id="cb69-4"><a href="facebook-prophet.html#cb69-4" aria-hidden="true" tabindex="-1"></a>fig</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-19.png" width="960" />
 La mayoría de predicciones(linea) adoptan la forma de los datos reales(puntos) o se acojen al intervalo de confianza. Revisemos en un ultimo paso el RMSE usando validación cruzada, donde se hará una división del conjunto de datos de 180 y se evaluaran 90.</p>
 <p>Paso 4: Realizamos validación cruzada y calculamos metricas</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="facebook-prophet.html#cb72-1" aria-hidden="true" tabindex="-1"></a>df_cv <span class="op">=</span> cross_validation(model, horizon<span class="op">=</span><span class="st">&quot;90 days&quot;</span>, period <span class="op">=</span> <span class="st">&quot;180 days&quot;</span>)</span></code></pre></div>
-<pre><code>## INFO:prophet:Making 10 forecasts with cutoffs between 2018-04-25 00:00:00 and 2022-10-01 00:00:00
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="facebook-prophet.html#cb70-1" aria-hidden="true" tabindex="-1"></a>df_cv <span class="op">=</span> cross_validation(model, horizon<span class="op">=</span><span class="st">&quot;90 days&quot;</span>, period <span class="op">=</span> <span class="st">&quot;180 days&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+  0%|          | 0/10 [00:00&lt;?, ?it/s]19:49:00 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:00 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-  0%|          | 0/10 [00:00&lt;?, ?it/s]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
+ 10%|#         | 1/10 [00:00&lt;00:04,  1.87it/s]19:49:01 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:01 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+ 20%|##        | 2/10 [00:01&lt;00:04,  1.77it/s]19:49:01 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:02 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
+ 30%|###       | 3/10 [00:02&lt;00:05,  1.38it/s]19:49:02 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:03 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+ 40%|####      | 4/10 [00:02&lt;00:04,  1.28it/s]19:49:03 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:04 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
+ 50%|#####     | 5/10 [00:04&lt;00:04,  1.04it/s]19:49:04 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:05 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+ 60%|######    | 6/10 [00:05&lt;00:04,  1.07s/it]19:49:06 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:06 - cmdstanpy - INFO - Chain [1] done processing
 ## 
+ 70%|#######   | 7/10 [00:06&lt;00:03,  1.12s/it]19:49:07 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:07 - cmdstanpy - INFO - Chain [1] done processing
 ## 
- 10%|#         | 1/10 [00:01&lt;00:13,  1.55s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
+ 80%|########  | 8/10 [00:07&lt;00:02,  1.05s/it]19:49:08 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:09 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+ 90%|######### | 9/10 [00:09&lt;00:01,  1.28s/it]19:49:10 - cmdstanpy - INFO - Chain [1] start processing
+## 19:49:11 - cmdstanpy - INFO - Chain [1] done processing
 ## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 20%|##        | 2/10 [00:03&lt;00:14,  1.81s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 30%|###       | 3/10 [00:05&lt;00:13,  1.94s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 40%|####      | 4/10 [00:08&lt;00:13,  2.19s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 50%|#####     | 5/10 [00:11&lt;00:12,  2.54s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 60%|######    | 6/10 [00:14&lt;00:11,  2.83s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 70%|#######   | 7/10 [00:18&lt;00:09,  3.25s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 80%|########  | 8/10 [00:23&lt;00:07,  3.77s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
- 90%|######### | 9/10 [00:30&lt;00:04,  4.77s/it]C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## C:\Users\carlos\ANACON~1\lib\site-packages\prophet\forecaster.py:896: FutureWarning:
-## 
-## The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-## 
-## 
-100%|##########| 10/10 [00:36&lt;00:00,  4.95s/it]
-100%|##########| 10/10 [00:36&lt;00:00,  3.61s/it]</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="facebook-prophet.html#cb74-1" aria-hidden="true" tabindex="-1"></a>df_p <span class="op">=</span> performance_metrics(df_cv, rolling_window<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb74-2"><a href="facebook-prophet.html#cb74-2" aria-hidden="true" tabindex="-1"></a>rmses <span class="op">=</span> []  <span class="co"># Store the RMSEs for each params here</span></span>
-<span id="cb74-3"><a href="facebook-prophet.html#cb74-3" aria-hidden="true" tabindex="-1"></a>rmses.append(df_p[<span class="st">&#39;rmse&#39;</span>].values[<span class="dv">0</span>])</span>
-<span id="cb74-4"><a href="facebook-prophet.html#cb74-4" aria-hidden="true" tabindex="-1"></a>rmses</span></code></pre></div>
-<pre><code>## [282.2342052421122]</code></pre>
+100%|##########| 10/10 [00:11&lt;00:00,  1.40s/it]
+100%|##########| 10/10 [00:11&lt;00:00,  1.10s/it]</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="facebook-prophet.html#cb72-1" aria-hidden="true" tabindex="-1"></a>df_p <span class="op">=</span> performance_metrics(df_cv, rolling_window<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb72-2"><a href="facebook-prophet.html#cb72-2" aria-hidden="true" tabindex="-1"></a>rmses <span class="op">=</span> []  <span class="co"># Store the RMSEs for each params here</span></span>
+<span id="cb72-3"><a href="facebook-prophet.html#cb72-3" aria-hidden="true" tabindex="-1"></a>rmses.append(df_p[<span class="st">&#39;rmse&#39;</span>].values[<span class="dv">0</span>])</span>
+<span id="cb72-4"><a href="facebook-prophet.html#cb72-4" aria-hidden="true" tabindex="-1"></a>rmses</span></code></pre></div>
+<pre><code>## [285.46326653247286]</code></pre>
 <p>Este sería el error cuadratrico medio</p>
 
 </div>
@@ -370,8 +262,8 @@ La mayoría de predicciones(linea) adoptan la forma de los datos reales(puntos) 
           </div>
         </div>
       </div>
-<a href="metodología-box-jenkins.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="metodología-box-jenkins.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="elman.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
